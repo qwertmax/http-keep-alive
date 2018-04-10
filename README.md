@@ -21,3 +21,11 @@ X-Processed-Time: 0
 Content-Length: 0
 Via: 1.1 vegur
 ```
+
+## Keep Alive HTTP request
+
+```bash
+cat <(printf "GET /status/200 HTTP/1.1\r\nHost: httpbin.org\r\nConnection: keep-alive\r\n\r\n") \
+      <(printf "GET /status/200 HTTP/1.1\r\nHost: httpbin.org\r\nConnection: close\r\n\r\n") \
+  | nc httpbin.org 80
+```
